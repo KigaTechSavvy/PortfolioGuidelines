@@ -13,28 +13,50 @@
     <header id="header">
         <div class="container header-container">
             <a href="#" class="logo">Elisha<span>.</span></a>
-            <div class="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </div>
-            <nav id="nav">
+            
+            <!-- Desktop Navigation -->
+            <nav class="desktop-nav" id="nav">
                 <ul>
-                    <li><a href="#hero">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#education">Education</a></li>
-                    <li><a href="#interests">Interests</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#hero"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
+                    <li><a href="#education"><i class="fas fa-graduation-cap"></i> Education</a></li>
+                    <li><a href="#interests"><i class="fas fa-lightbulb"></i> Interests</a></li>
+                    <li><a href="#projects"><i class="fas fa-code"></i> Projects</a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
                 </ul>
             </nav>
+
+            <!-- Mobile Menu Button -->
+            <button class="menu-toggle" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav">
+        <button class="close-btn" id="closeBtn">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul>
+            <li><a href="#hero"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
+            <li><a href="#education"><i class="fas fa-graduation-cap"></i> Education</a></li>
+            <li><a href="#interests"><i class="fas fa-lightbulb"></i> Interests</a></li>
+            <li><a href="#projects"><i class="fas fa-code"></i> Projects</a></li>
+            <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Overlay for mobile menu -->
+    <div class="overlay" id="overlay"></div>
 
     <!-- Hero Section -->
     <section id="hero">
         <div class="container">
             <div class="hero-content">
                 <h1><span class="greeting">Hi, I'm</span> <span class="typing-text">Elisha Kigalave</span></h1>
-                <p>Transforming ideas into elegant solutions through code. I don’t just write code—I craft solutions that solve real problems,  blending technical precision with innovative thinking to make an impact.</p>
+                <p>Transforming ideas into elegant solutions through code. I don't just write code—I craft solutions that solve real problems,  blending technical precision with innovative thinking to make an impact.</p>
                 <a href="#contact" class="btn">Get In Touch</a>
             </div>
             <div class="hero-image">
@@ -128,7 +150,7 @@
                 </div>
             </div>
             <div class="download-cv">
-                <a href="https://drive.google.com/file/d/1dVKi-EYN6Wos1y6Gg_ZKylOvDsszIPGZ/view?usp=drive_link" target="_blank" class="btn cv-btn">
+                <a href="https://drive.google.com/file/d/1dVKi-EYN6Wos1y6Gg_ZKylOvDsszIPGZ/view?usp=sharing" target="_blank" class="btn cv-btn">
                     <i class="fas fa-download"></i>
                     <span>View My CV</span>
                 </a>
@@ -266,19 +288,19 @@
                     <form id="contactForm">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" id="name" class="form-control" required>
+                            <input type="text" id="name" class="form-control" placeholder="Enter Your Name" required>
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" class="form-control" required>
+                            <input type="email" id="email" class="form-control" placeholder="Enter your email">
                         </div>
                         <div class="form-group">
                             <label for="subject">Subject</label>
-                            <input type="text" id="subject" class="form-control" required>
+                            <input type="text" id="subject" class="form-control" placeholder="Enter a subject" required>
                         </div>
                         <div class="form-group">
                             <label for="message">Message</label>
-                            <textarea id="message" class="form-control" required></textarea>
+                            <textarea id="message" class="form-control" placeholder="Enter a message" required></textarea>
                         </div>
                         <button type="submit" class="btn">Send Message</button>
                     </form>

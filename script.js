@@ -58,19 +58,100 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Mobile Menu Toggle
-const menuToggle = document.querySelector('.menu-toggle');
-const nav = document.querySelector('#nav');
+// Get all navigation links
+const navLinks = document.querySelectorAll('.desktop-nav a, .mobile-nav a');
 
-menuToggle.addEventListener('click', () => {
-    nav.classList.toggle('active');
+// Function to set active nav item based on scroll position
+function setActiveNavItem() {
+    const sections = document.querySelectorAll('section');
+    const scrollPosition = window.scrollY + 100; // Offset for better accuracy
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        const sectionId = section.getAttribute('id');
+
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${sectionId}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    });
+}
+
+// Add smooth scrolling to nav links
+navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        
+        if (targetSection) {
+            targetSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+            
+            // Close mobile menu if open
+            if (mobileNav.classList.contains('active')) {
+                mobileNav.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+    });
 });
 
-// Close mobile menu when clicking a link
-document.querySelectorAll('#nav a').forEach(link => {
-    link.addEventListener('click', () => {
-        nav.classList.remove('active');
-    });
+// Update active nav item on scroll
+window.addEventListener('scroll', setActiveNavItem);
+window.addEventListener('load', setActiveNavItem);
+
+// Mobile Menu Functionality
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileNav = document.getElementById('mobileNav');
+const closeBtn = document.getElementById('closeBtn');
+const overlay = document.getElementById('overlay');
+
+// Open mobile menu
+mobileMenuBtn.addEventListener('click', () => {
+    mobileNav.classList.add('active');
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+});
+
+// Close mobile menu
+closeBtn.addEventListener('click', () => {
+    mobileNav.classList.remove('active');
+    overlay.classList.remove('active');
+    document.body.style.overflow = 'auto';
+});
+
+// Close when clicking overlay
+overlay.addEventListener('click', () => {
+    mobileNav.classList.remove('active');
+    overlay.classList.remove('active');
+    document.body.style.overflow = 'auto';
+});
+
+// Close menu on escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+        mobileNav.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+});
+
+// Close menu on window resize
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768 && mobileNav.classList.contains('active')) {
+        mobileNav.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
 });
 
 // Header scroll effect
@@ -198,30 +279,6 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
-
-// Add active class to navigation links on scroll
-const sections = document.querySelectorAll('section');
-const navItems = document.querySelectorAll('#nav a');
-
-window.addEventListener('scroll', () => {
-    let current = '';
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        
-        if (pageYOffset >= sectionTop - 60) {
-            current = section.getAttribute('id');
-        }
-    });
-    
-    navItems.forEach(item => {
-        item.classList.remove('active');
-        if (item.getAttribute('href').slice(1) === current) {
-            item.classList.add('active');
-        }
-    });
-});
 
 // Add parallax effect to hero section
 window.addEventListener('scroll', () => {
